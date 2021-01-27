@@ -55,5 +55,18 @@ function validateRegistration(user) {
   });
 }
 
+function validateLogin(user) {
+  const schema = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+  });
+
+  return schema.validate({
+    email: user.email,
+    password: user.password,
+  });
+}
+
 module.exports.User = User;
-module.exports.validate = validateRegistration;
+module.exports.validateLogin = validateLogin;
+module.exports.validateRegistration = validateRegistration;

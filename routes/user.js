@@ -4,11 +4,11 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const { User, validate } = require("../models/registerUser");
+const { User, validateRegistration } = require("../models/user");
 
 // Registering new User.
-router.post("/register", async (req, res) => {
-  const { error } = validate(req.body);
+router.post("/", async (req, res) => {
+  const { error } = validateRegistration(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   let user = await User.findOne({ email: req.body.email });
